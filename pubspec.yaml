@@ -1,16 +1,13 @@
 name: reddit_readonly
-description: A starting point for Dart libraries or applications.
+description: client for reddit read-only REST API
 version: 0.1.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.0.3
+  sdk: ">=3.1.0 <4.0.0"
 
-# Add regular dependencies here.
 dependencies:
   http: ^1.1.0
-  # path: ^1.8.0
 
 dev_dependencies:
-  lints: ^2.0.0
+  lints: ^3.0.0
   test: ^1.21.0

@@ -21,11 +21,15 @@ class Response {
       );
 
   Map<String, dynamic> toMap() => {
-        "after": after,
-        "posts": posts == null
-            ? []
-            : List<dynamic>.from(posts!.map((x) => x.toMap())),
+        if (after != null) "after": after,
+        if (posts != null)
+          "posts": List<dynamic>.from(posts!.map((x) => x.toMap())),
       };
+
+  static final pp = JsonEncoder.withIndent('  ');
+
+  @override
+  String toString() => pp.convert(toMap());
 }
 
 class Post {
@@ -48,7 +52,7 @@ class Post {
 
   Map<String, dynamic> toMap() => {
         "kind": kindValues.reverse[kind],
-        "data": data?.toMap(),
+        if (data != null) "data": data?.toMap(),
       };
 }
 
@@ -439,18 +443,18 @@ class Data {
       );
 
   Map<String, dynamic> toMap() => {
-        "approved_at_utc": approvedAtUtc,
-        "subreddit": subreddit,
-        "selftext": selftext,
-        "author_fullname": authorFullname,
-        "saved": saved,
-        "mod_reason_title": modReasonTitle,
-        "gilded": gilded,
-        "clicked": clicked,
-        "title": title,
-        "link_flair_richtext": linkFlairRichtext == null
-            ? []
-            : List<dynamic>.from(linkFlairRichtext!.map((x) => x.toMap())),
+        if (approvedAtUtc != null) "approved_at_utc": approvedAtUtc,
+        if (subreddit != null) "subreddit": subreddit,
+        if (selftext != null) "selftext": selftext,
+        if (authorFullname != null) "author_fullname": authorFullname,
+        if (saved != null) "saved": saved,
+        if (modReasonTitle != null) "mod_reason_title": modReasonTitle,
+        if (gilded != null) "gilded": gilded,
+        if (clicked != null) "clicked": clicked,
+        if (title != null) "title": title,
+        if (linkFlairRichtext != null)
+          "link_flair_richtext":
+              linkFlairRichtext!.map((x) => x.toMap()).toList(),
         "subreddit_name_prefixed": subredditNamePrefixed,
         "hidden": hidden,
         "pwls": pwls,
@@ -486,9 +490,9 @@ class Data {
         "approved_by": approvedBy,
         "is_created_from_ads_ui": isCreatedFromAdsUi,
         "author_premium": authorPremium,
-        "thumbnail": thumbnail,
-        "author_cakeday": authorCakeday,
-        "edited": edited,
+        if (thumbnail != null) "thumbnail": thumbnail,
+        if (authorCakeday != null) "author_cakeday": authorCakeday,
+        if (edited != null) "edited": edited,
         "author_flair_css_class": authorFlairCssClass,
         "author_flair_richtext": authorFlairRichtext == null
             ? []
@@ -535,9 +539,10 @@ class Data {
         "subreddit_id": subredditId,
         "author_is_blocked": authorIsBlocked,
         "mod_reason_by": modReasonBy,
-        "removal_reason": removalReason,
-        "link_flair_background_color": linkFlairBackgroundColor,
-        "id": id,
+        if (removalReason != null) "removal_reason": removalReason,
+        if (linkFlairBackgroundColor != null)
+          "link_flair_background_color": linkFlairBackgroundColor,
+        if (id != null) "id": id,
         "is_robot_indexable": isRobotIndexable,
         "report_reasons": reportReasons,
         "author": author,

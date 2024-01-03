@@ -320,7 +320,7 @@ class Client {
     final data = json['data'];
     return Response.fromMap({
       'after': data['after'],
-      'children': data['children'],
+      'posts': data['children'],
     });
   }
 }
