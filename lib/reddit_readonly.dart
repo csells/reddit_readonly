@@ -1,6 +1,4 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library;
 
 export 'src/reddit_client.dart';
+export 'src/reddit_response.dart';
