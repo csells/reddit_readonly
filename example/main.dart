@@ -1,7 +1,8 @@
-import 'package:reddit_readonly/reddit_readonly.dart' as reddit;
+import 'package:reddit_readonly/reddit_readonly.dart';
+import 'package:reddit_readonly/src/reddit_response.dart';
 
 void main() async {
-  final client = reddit.Client();
+  final client = RedditClient();
   // final domain = 'sellsbrothers.com';
 
   final futures = [

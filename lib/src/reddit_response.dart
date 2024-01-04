@@ -1,19 +1,20 @@
 import 'dart:convert';
 
-class Response {
+class RedditResponse {
   final String? after;
   final List<Post>? posts;
 
-  Response({
+  RedditResponse({
     this.after,
     this.posts,
   });
 
-  factory Response.fromJson(String str) => Response.fromMap(json.decode(str));
+  factory RedditResponse.fromJson(String str) =>
+      RedditResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Response.fromMap(Map<String, dynamic> json) => Response(
+  factory RedditResponse.fromMap(Map<String, dynamic> json) => RedditResponse(
         after: json["after"],
         posts: json["posts"] == null
             ? []

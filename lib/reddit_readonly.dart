@@ -3,4 +3,4 @@
 /// More dartdocs go here.
 library;
 
-export 'src/client.dart';
+export 'src/reddit_client.dart';

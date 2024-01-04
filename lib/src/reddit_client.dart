@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:reddit_readonly/src/response.dart';
+import 'package:reddit_readonly/src/reddit_response.dart';
 
-class Client {
+class RedditClient {
   final String host = "https://www.reddit.com";
   final Map<String, dynamic> parameters = {
     'limit': 25,
@@ -14,7 +14,7 @@ class Client {
     'type': "sr,link,user",
   };
 
-  Future<Response> getSubmissions({
+  Future<RedditResponse> getSubmissions({
     String? sort,
     String? subreddit,
     Map<String, dynamic>? options,
@@ -32,7 +32,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainHot(
+  Future<RedditResponse> getDomainHot(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -41,7 +41,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainBest(
+  Future<RedditResponse> getDomainBest(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -50,7 +50,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainTop(
+  Future<RedditResponse> getDomainTop(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -59,7 +59,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainNew(
+  Future<RedditResponse> getDomainNew(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -68,7 +68,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainRising(
+  Future<RedditResponse> getDomainRising(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -77,7 +77,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getDomainControversial(
+  Future<RedditResponse> getDomainControversial(
     String domain, {
     Map<String, dynamic>? options,
   }) async {
@@ -86,30 +86,30 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getSubreddit(String subreddit) async {
+  Future<RedditResponse> getSubreddit(String subreddit) async {
     final response = await http.get(Uri.parse("$host/r/$subreddit/about.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditRules(String subreddit) async {
+  Future<RedditResponse> getSubredditRules(String subreddit) async {
     final response =
         await http.get(Uri.parse("$host/r/$subreddit/about/rules.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditModerators(String subreddit) async {
+  Future<RedditResponse> getSubredditModerators(String subreddit) async {
     final response =
         await http.get(Uri.parse("$host/r/$subreddit/about/moderators.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditWikiPages(String subreddit) async {
+  Future<RedditResponse> getSubredditWikiPages(String subreddit) async {
     final response =
         await http.get(Uri.parse("$host/r/$subreddit/wiki/pages.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditWikiPage(
+  Future<RedditResponse> getSubredditWikiPage(
     String subreddit,
     String page,
   ) async {
@@ -118,7 +118,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditWikiPageRevisions(
+  Future<RedditResponse> getSubredditWikiPageRevisions(
     String subreddit,
     String page,
   ) async {
@@ -127,43 +127,48 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getPopularSubreddits({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getPopularSubreddits(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/subreddits/popular.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> getNewSubreddits({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getNewSubreddits(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/subreddits/new.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> getPremiumSubreddits({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getPremiumSubreddits(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/subreddits/premium.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> getDefaultSubreddits({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getDefaultSubreddits(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/subreddits/default.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> getPopularUsers({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getPopularUsers(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/users/popular.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> getNewUsers({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getNewUsers({Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/users/new.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
   }
 
-  Future<Response> searchSubmissions(
+  Future<RedditResponse> searchSubmissions(
     String query, {
     Map<String, dynamic>? options,
   }) async {
@@ -176,7 +181,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> searchSubreddits(
+  Future<RedditResponse> searchSubreddits(
     String query, {
     Map<String, dynamic>? options,
   }) async {
@@ -188,7 +193,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> searchUsers(
+  Future<RedditResponse> searchUsers(
     String query, {
     Map<String, dynamic>? options,
   }) async {
@@ -200,7 +205,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> searchAll(
+  Future<RedditResponse> searchAll(
     String query, {
     String? subreddit,
     Map<String, dynamic>? options,
@@ -214,12 +219,12 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getSubmission(String id) async {
+  Future<RedditResponse> getSubmission(String id) async {
     final response = await http.get(Uri.parse("$host/by_id/$id.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getSubmissionComments(
+  Future<RedditResponse> getSubmissionComments(
     String id, {
     Map<String, dynamic>? options,
   }) async {
@@ -228,7 +233,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getSubredditComments(
+  Future<RedditResponse> getSubredditComments(
     String subreddit, {
     Map<String, dynamic>? options,
   }) async {
@@ -237,13 +242,13 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getUser(String username) async {
+  Future<RedditResponse> getUser(String username) async {
     final response =
         await http.get(Uri.parse("$host/user/$username/about.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getUserOverview(
+  Future<RedditResponse> getUserOverview(
     String username, {
     Map<String, dynamic>? options,
   }) async {
@@ -252,7 +257,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getUserComments(
+  Future<RedditResponse> getUserComments(
     String username, {
     Map<String, dynamic>? options,
   }) async {
@@ -261,7 +266,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getUserSubmissions(
+  Future<RedditResponse> getUserSubmissions(
     String username, {
     Map<String, dynamic>? options,
   }) async {
@@ -270,12 +275,12 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getLiveThread(String id) async {
+  Future<RedditResponse> getLiveThread(String id) async {
     final response = await http.get(Uri.parse("$host/live/$id/about.json"));
     return _processResponse(response);
   }
 
-  Future<Response> getLiveThreadUpdates(
+  Future<RedditResponse> getLiveThreadUpdates(
     String id, {
     Map<String, dynamic>? options,
   }) async {
@@ -284,7 +289,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getLiveThreadContributors(
+  Future<RedditResponse> getLiveThreadContributors(
     String id, {
     Map<String, dynamic>? options,
   }) async {
@@ -293,7 +298,7 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getLiveThreadDiscussions(
+  Future<RedditResponse> getLiveThreadDiscussions(
     String id, {
     Map<String, dynamic>? options,
   }) async {
@@ -302,7 +307,8 @@ class Client {
     return _processResponse(response);
   }
 
-  Future<Response> getLiveThreadsNow({Map<String, dynamic>? options}) async {
+  Future<RedditResponse> getLiveThreadsNow(
+      {Map<String, dynamic>? options}) async {
     final response = await http.get(Uri.parse(
         "$host/live/happening_now.json?${_mapToUrlParams(options ?? parameters)}"));
     return _processResponse(response);
@@ -313,12 +319,12 @@ class Client {
           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
       .join('&');
 
-  Response _processResponse(http.Response response) {
+  RedditResponse _processResponse(http.Response response) {
     if (response.statusCode != 200) throw Exception('Failed to load data');
 
     final json = jsonDecode(response.body);
     final data = json['data'];
-    return Response.fromMap({
+    return RedditResponse.fromMap({
       'after': data['after'],
       'posts': data['children'],
     });
