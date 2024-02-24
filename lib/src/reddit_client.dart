@@ -228,8 +228,9 @@ class RedditClient {
     String id, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        "$host/comments/$id.json?${_mapToUrlParams(options ?? parameters)}"));
+    final url = Uri.parse(
+        "$host/comments/$id.json?${_mapToUrlParams(options ?? parameters)}");
+    final response = await http.get(url);
     return _processResponse(response);
   }
 
@@ -319,11 +320,13 @@ class RedditClient {
           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
       .join('&');
 
-  RedditResponse _processResponse(http.Response response) {
-    if (response.statusCode != 200) throw Exception('Failed to load data');
+  RedditResponse _processResponse(http.Response resp) {
+    if (resp.statusCode != 200) {
+      throw Exception('Error: ${resp.reasonPhrase} (${resp.statusCode})');
+    }
 
-    final json = jsonDecode(response.body);
-    final data = json['data'];
+    final json = jsonDecode(resp.body);
+    final data = (json is List ? json.first : json)['data'];
     return RedditResponse.fromMap({
       'after': data['after'],
       'posts': data['children'],

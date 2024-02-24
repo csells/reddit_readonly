@@ -8,7 +8,7 @@
       "name": "reddit_readonly",
       "request": "launch",
       "type": "dart",
-      "program": "example/reddit_readonly_example.dart"
+      "program": "example/main.dart"
     }
   ]
 }

@@ -1,3 +1,7 @@
+## 0.2.2
+
+- updated more names for usability, e.g. Data => RedditData
+
 ## 0.2.1
 
 - fixed exports to include RedditResponse

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class RedditResponse {
   final String? after;
-  final List<Post>? posts;
+  final List<RedditPost>? posts;
 
   RedditResponse({
     this.after,
@@ -18,7 +18,7 @@ class RedditResponse {
         after: json["after"],
         posts: json["posts"] == null
             ? []
-            : List<Post>.from(json["posts"]!.map((x) => Post.fromMap(x))),
+            : List<RedditPost>.from(json["posts"]!.map((x) => RedditPost.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -33,22 +33,22 @@ class RedditResponse {
   String toString() => pp.convert(toMap());
 }
 
-class Post {
+class RedditPost {
   final Kind? kind;
-  final Data? data;
+  final RedditData? data;
 
-  Post({
+  RedditPost({
     this.kind,
     this.data,
   });
 
-  factory Post.fromJson(String str) => Post.fromMap(json.decode(str));
+  factory RedditPost.fromJson(String str) => RedditPost.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Post.fromMap(Map<String, dynamic> json) => Post(
+  factory RedditPost.fromMap(Map<String, dynamic> json) => RedditPost(
         kind: kindValues.map[json["kind"]],
-        data: json["data"] == null ? null : Data.fromMap(json["data"]),
+        data: json["data"] == null ? null : RedditData.fromMap(json["data"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -57,7 +57,7 @@ class Post {
       };
 }
 
-class Data {
+class RedditData {
   final dynamic approvedAtUtc;
   final String? subreddit;
   final String? selftext;
@@ -67,7 +67,7 @@ class Data {
   final int? gilded;
   final bool? clicked;
   final String? title;
-  final List<FlairRichtext>? linkFlairRichtext;
+  final List<RedditFlairRichtext>? linkFlairRichtext;
   final String? subredditNamePrefixed;
   final bool? hidden;
   final int? pwls;
@@ -84,16 +84,16 @@ class Data {
   final SubredditType? subredditType;
   final int? ups;
   final int? totalAwardsReceived;
-  final MediaEmbed? mediaEmbed;
+  final RedditMediaEmbed? mediaEmbed;
   final int? thumbnailWidth;
   final String? authorFlairTemplateId;
   final bool? isOriginalContent;
   final List<dynamic>? userReports;
-  final Media? secureMedia;
+  final RedditMedia? secureMedia;
   final bool? isRedditMediaDomain;
   final bool? isMeta;
   final dynamic category;
-  final MediaEmbed? secureMediaEmbed;
+  final RedditMediaEmbed? secureMediaEmbed;
   final String? linkFlairText;
   final bool? canModPost;
   final int? score;
@@ -104,8 +104,8 @@ class Data {
   final bool? authorCakeday;
   final dynamic edited;
   final dynamic authorFlairCssClass;
-  final List<FlairRichtext>? authorFlairRichtext;
-  final Gildings? gildings;
+  final List<RedditFlairRichtext>? authorFlairRichtext;
+  final RedditGildings? gildings;
   final dynamic contentCategories;
   final bool? isSelf;
   final dynamic modNote;
@@ -127,7 +127,7 @@ class Data {
   final bool? isCrosspostable;
   final bool? pinned;
   final bool? over18;
-  final List<AllAwarding>? allAwardings;
+  final List<RedditAllAwarding>? allAwardings;
   final List<dynamic>? awarders;
   final bool? mediaOnly;
   final bool? canGild;
@@ -163,17 +163,17 @@ class Data {
   final int? subredditSubscribers;
   final double? createdUtc;
   final int? numCrossposts;
-  final Media? media;
+  final RedditMedia? media;
   final bool? isVideo;
   final PostHint? postHint;
   final String? urlOverriddenByDest;
-  final Preview? preview;
+  final RedditPreview? preview;
   final String? linkFlairTemplateId;
   final bool? isGallery;
-  final Map<String, MediaMetadatum>? mediaMetadata;
-  final GalleryData? galleryData;
+  final Map<String, RedditMediaMetadatum>? mediaMetadata;
+  final RedditGalleryData? galleryData;
 
-  Data({
+  RedditData({
     this.approvedAtUtc,
     this.subreddit,
     this.selftext,
@@ -290,11 +290,11 @@ class Data {
     this.galleryData,
   });
 
-  factory Data.fromJson(String str) => Data.fromMap(json.decode(str));
+  factory RedditData.fromJson(String str) => RedditData.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromMap(Map<String, dynamic> json) => Data(
+  factory RedditData.fromMap(Map<String, dynamic> json) => RedditData(
         approvedAtUtc: json["approved_at_utc"],
         subreddit: json["subreddit"],
         selftext: json["selftext"],
@@ -306,8 +306,8 @@ class Data {
         title: json["title"],
         linkFlairRichtext: json["link_flair_richtext"] == null
             ? []
-            : List<FlairRichtext>.from(json["link_flair_richtext"]!
-                .map((x) => FlairRichtext.fromMap(x))),
+            : List<RedditFlairRichtext>.from(json["link_flair_richtext"]!
+                .map((x) => RedditFlairRichtext.fromMap(x))),
         subredditNamePrefixed: json["subreddit_name_prefixed"],
         hidden: json["hidden"],
         pwls: json["pwls"],
@@ -327,7 +327,7 @@ class Data {
         totalAwardsReceived: json["total_awards_received"],
         mediaEmbed: json["media_embed"] == null
             ? null
-            : MediaEmbed.fromMap(json["media_embed"]),
+            : RedditMediaEmbed.fromMap(json["media_embed"]),
         thumbnailWidth: json["thumbnail_width"],
         authorFlairTemplateId: json["author_flair_template_id"],
         isOriginalContent: json["is_original_content"],
@@ -336,13 +336,13 @@ class Data {
             : List<dynamic>.from(json["user_reports"]!.map((x) => x)),
         secureMedia: json["secure_media"] == null
             ? null
-            : Media.fromMap(json["secure_media"]),
+            : RedditMedia.fromMap(json["secure_media"]),
         isRedditMediaDomain: json["is_reddit_media_domain"],
         isMeta: json["is_meta"],
         category: json["category"],
         secureMediaEmbed: json["secure_media_embed"] == null
             ? null
-            : MediaEmbed.fromMap(json["secure_media_embed"]),
+            : RedditMediaEmbed.fromMap(json["secure_media_embed"]),
         linkFlairText: json["link_flair_text"],
         canModPost: json["can_mod_post"],
         score: json["score"],
@@ -355,11 +355,11 @@ class Data {
         authorFlairCssClass: json["author_flair_css_class"],
         authorFlairRichtext: json["author_flair_richtext"] == null
             ? []
-            : List<FlairRichtext>.from(json["author_flair_richtext"]!
-                .map((x) => FlairRichtext.fromMap(x))),
+            : List<RedditFlairRichtext>.from(json["author_flair_richtext"]!
+                .map((x) => RedditFlairRichtext.fromMap(x))),
         gildings: json["gildings"] == null
             ? null
-            : Gildings.fromMap(json["gildings"]),
+            : RedditGildings.fromMap(json["gildings"]),
         contentCategories: json["content_categories"],
         isSelf: json["is_self"],
         modNote: json["mod_note"],
@@ -383,8 +383,8 @@ class Data {
         over18: json["over_18"],
         allAwardings: json["all_awardings"] == null
             ? []
-            : List<AllAwarding>.from(
-                json["all_awardings"]!.map((x) => AllAwarding.fromMap(x))),
+            : List<RedditAllAwarding>.from(
+                json["all_awardings"]!.map((x) => RedditAllAwarding.fromMap(x))),
         awarders: json["awarders"] == null
             ? []
             : List<dynamic>.from(json["awarders"]!.map((x) => x)),
@@ -428,19 +428,19 @@ class Data {
         subredditSubscribers: json["subreddit_subscribers"],
         createdUtc: json["created_utc"],
         numCrossposts: json["num_crossposts"],
-        media: json["media"] == null ? null : Media.fromMap(json["media"]),
+        media: json["media"] == null ? null : RedditMedia.fromMap(json["media"]),
         isVideo: json["is_video"],
         postHint: postHintValues.map[json["post_hint"]],
         urlOverriddenByDest: json["url_overridden_by_dest"],
         preview:
-            json["preview"] == null ? null : Preview.fromMap(json["preview"]),
+            json["preview"] == null ? null : RedditPreview.fromMap(json["preview"]),
         linkFlairTemplateId: json["link_flair_template_id"],
         isGallery: json["is_gallery"],
         mediaMetadata: Map.from(json["media_metadata"] ?? {}).map((k, v) =>
-            MapEntry<String, MediaMetadatum>(k, MediaMetadatum.fromMap(v))),
+            MapEntry<String, RedditMediaMetadatum>(k, RedditMediaMetadatum.fromMap(v))),
         galleryData: json["gallery_data"] == null
             ? null
-            : GalleryData.fromMap(json["gallery_data"]),
+            : RedditGalleryData.fromMap(json["gallery_data"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -579,7 +579,7 @@ class Data {
       };
 }
 
-class AllAwarding {
+class RedditAllAwarding {
   final dynamic giverCoinReward;
   final dynamic subredditId;
   final bool? isNew;
@@ -592,7 +592,7 @@ class AllAwarding {
   final String? iconUrl;
   final int? daysOfPremium;
   final dynamic tiersByRequiredAwardings;
-  final List<ResizedIcon>? resizedIcons;
+  final List<RedditResizedIcon>? resizedIcons;
   final int? iconWidth;
   final int? staticIconWidth;
   final dynamic startDate;
@@ -605,14 +605,14 @@ class AllAwarding {
   final int? count;
   final int? staticIconHeight;
   final String? name;
-  final List<ResizedIcon>? resizedStaticIcons;
+  final List<RedditResizedIcon>? resizedStaticIcons;
   final IconFormat? iconFormat;
   final int? iconHeight;
   final int? pennyPrice;
   final AwardType? awardType;
   final String? staticIconUrl;
 
-  AllAwarding({
+  RedditAllAwarding({
     this.giverCoinReward,
     this.subredditId,
     this.isNew,
@@ -646,12 +646,12 @@ class AllAwarding {
     this.staticIconUrl,
   });
 
-  factory AllAwarding.fromJson(String str) =>
-      AllAwarding.fromMap(json.decode(str));
+  factory RedditAllAwarding.fromJson(String str) =>
+      RedditAllAwarding.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory AllAwarding.fromMap(Map<String, dynamic> json) => AllAwarding(
+  factory RedditAllAwarding.fromMap(Map<String, dynamic> json) => RedditAllAwarding(
         giverCoinReward: json["giver_coin_reward"],
         subredditId: json["subreddit_id"],
         isNew: json["is_new"],
@@ -666,8 +666,8 @@ class AllAwarding {
         tiersByRequiredAwardings: json["tiers_by_required_awardings"],
         resizedIcons: json["resized_icons"] == null
             ? []
-            : List<ResizedIcon>.from(
-                json["resized_icons"]!.map((x) => ResizedIcon.fromMap(x))),
+            : List<RedditResizedIcon>.from(
+                json["resized_icons"]!.map((x) => RedditResizedIcon.fromMap(x))),
         iconWidth: json["icon_width"],
         staticIconWidth: json["static_icon_width"],
         startDate: json["start_date"],
@@ -683,8 +683,8 @@ class AllAwarding {
         name: json["name"],
         resizedStaticIcons: json["resized_static_icons"] == null
             ? []
-            : List<ResizedIcon>.from(json["resized_static_icons"]!
-                .map((x) => ResizedIcon.fromMap(x))),
+            : List<RedditResizedIcon>.from(json["resized_static_icons"]!
+                .map((x) => RedditResizedIcon.fromMap(x))),
         iconFormat: iconFormatValues.map[json["icon_format"]],
         iconHeight: json["icon_height"],
         pennyPrice: json["penny_price"],
@@ -734,7 +734,7 @@ class AllAwarding {
 
 enum AwardSubType { appreciation, global, premium }
 
-final awardSubTypeValues = EnumValues({
+final awardSubTypeValues = RedditEnumValues({
   "APPRECIATION": AwardSubType.appreciation,
   "GLOBAL": AwardSubType.global,
   "PREMIUM": AwardSubType.premium
@@ -742,30 +742,30 @@ final awardSubTypeValues = EnumValues({
 
 enum AwardType { global }
 
-final awardTypeValues = EnumValues({"global": AwardType.global});
+final awardTypeValues = RedditEnumValues({"global": AwardType.global});
 
 enum IconFormat { apng, png }
 
 final iconFormatValues =
-    EnumValues({"APNG": IconFormat.apng, "PNG": IconFormat.png});
+    RedditEnumValues({"APNG": IconFormat.apng, "PNG": IconFormat.png});
 
-class ResizedIcon {
+class RedditResizedIcon {
   final String? url;
   final int? width;
   final int? height;
 
-  ResizedIcon({
+  RedditResizedIcon({
     this.url,
     this.width,
     this.height,
   });
 
-  factory ResizedIcon.fromJson(String str) =>
-      ResizedIcon.fromMap(json.decode(str));
+  factory RedditResizedIcon.fromJson(String str) =>
+      RedditResizedIcon.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory ResizedIcon.fromMap(Map<String, dynamic> json) => ResizedIcon(
+  factory RedditResizedIcon.fromMap(Map<String, dynamic> json) => RedditResizedIcon(
         url: json["url"],
         width: json["width"],
         height: json["height"],
@@ -778,25 +778,25 @@ class ResizedIcon {
       };
 }
 
-class FlairRichtext {
+class RedditFlairRichtext {
   final String? a;
   final String? e;
   final String? u;
   final String? t;
 
-  FlairRichtext({
+  RedditFlairRichtext({
     this.a,
     this.e,
     this.u,
     this.t,
   });
 
-  factory FlairRichtext.fromJson(String str) =>
-      FlairRichtext.fromMap(json.decode(str));
+  factory RedditFlairRichtext.fromJson(String str) =>
+      RedditFlairRichtext.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory FlairRichtext.fromMap(Map<String, dynamic> json) => FlairRichtext(
+  factory RedditFlairRichtext.fromMap(Map<String, dynamic> json) => RedditFlairRichtext(
         a: json["a"],
         e: json["e"],
         u: json["u"],
@@ -814,29 +814,29 @@ class FlairRichtext {
 enum FlairTextColor { dark, light }
 
 final flairTextColorValues =
-    EnumValues({"dark": FlairTextColor.dark, "light": FlairTextColor.light});
+    RedditEnumValues({"dark": FlairTextColor.dark, "light": FlairTextColor.light});
 
 enum FlairType { text, richtext }
 
 final flairTypeValues =
-    EnumValues({"richtext": FlairType.richtext, "text": FlairType.text});
+    RedditEnumValues({"richtext": FlairType.richtext, "text": FlairType.text});
 
-class GalleryData {
-  final List<Item>? items;
+class RedditGalleryData {
+  final List<RedditItem>? items;
 
-  GalleryData({
+  RedditGalleryData({
     this.items,
   });
 
-  factory GalleryData.fromJson(String str) =>
-      GalleryData.fromMap(json.decode(str));
+  factory RedditGalleryData.fromJson(String str) =>
+      RedditGalleryData.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory GalleryData.fromMap(Map<String, dynamic> json) => GalleryData(
+  factory RedditGalleryData.fromMap(Map<String, dynamic> json) => RedditGalleryData(
         items: json["items"] == null
             ? []
-            : List<Item>.from(json["items"]!.map((x) => Item.fromMap(x))),
+            : List<RedditItem>.from(json["items"]!.map((x) => RedditItem.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -846,20 +846,20 @@ class GalleryData {
       };
 }
 
-class Item {
+class RedditItem {
   final String? mediaId;
   final int? id;
 
-  Item({
+  RedditItem({
     this.mediaId,
     this.id,
   });
 
-  factory Item.fromJson(String str) => Item.fromMap(json.decode(str));
+  factory RedditItem.fromJson(String str) => RedditItem.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Item.fromMap(Map<String, dynamic> json) => Item(
+  factory RedditItem.fromMap(Map<String, dynamic> json) => RedditItem(
         mediaId: json["media_id"],
         id: json["id"],
       );
@@ -870,18 +870,18 @@ class Item {
       };
 }
 
-class Gildings {
+class RedditGildings {
   final int? gid2;
 
-  Gildings({
+  RedditGildings({
     this.gid2,
   });
 
-  factory Gildings.fromJson(String str) => Gildings.fromMap(json.decode(str));
+  factory RedditGildings.fromJson(String str) => RedditGildings.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Gildings.fromMap(Map<String, dynamic> json) => Gildings(
+  factory RedditGildings.fromMap(Map<String, dynamic> json) => RedditGildings(
         gid2: json["gid_2"],
       );
 
@@ -890,18 +890,18 @@ class Gildings {
       };
 }
 
-class Media {
+class RedditMedia {
   final RedditVideo? redditVideo;
 
-  Media({
+  RedditMedia({
     this.redditVideo,
   });
 
-  factory Media.fromJson(String str) => Media.fromMap(json.decode(str));
+  factory RedditMedia.fromJson(String str) => RedditMedia.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Media.fromMap(Map<String, dynamic> json) => Media(
+  factory RedditMedia.fromMap(Map<String, dynamic> json) => RedditMedia(
         redditVideo: json["reddit_video"] == null
             ? null
             : RedditVideo.fromMap(json["reddit_video"]),
@@ -978,30 +978,30 @@ class RedditVideo {
 enum TranscodingStatus { completed }
 
 final transcodingStatusValues =
-    EnumValues({"completed": TranscodingStatus.completed});
+    RedditEnumValues({"completed": TranscodingStatus.completed});
 
-class MediaEmbed {
-  MediaEmbed();
+class RedditMediaEmbed {
+  RedditMediaEmbed();
 
-  factory MediaEmbed.fromJson(String str) =>
-      MediaEmbed.fromMap(json.decode(str));
+  factory RedditMediaEmbed.fromJson(String str) =>
+      RedditMediaEmbed.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory MediaEmbed.fromMap(Map<String, dynamic> json) => MediaEmbed();
+  factory RedditMediaEmbed.fromMap(Map<String, dynamic> json) => RedditMediaEmbed();
 
   Map<String, dynamic> toMap() => {};
 }
 
-class MediaMetadatum {
+class RedditMediaMetadatum {
   final String? status;
   final String? e;
   final String? m;
-  final List<S>? p;
-  final S? s;
+  final List<RedditS>? p;
+  final RedditS? s;
   final String? id;
 
-  MediaMetadatum({
+  RedditMediaMetadatum({
     this.status,
     this.e,
     this.m,
@@ -1010,19 +1010,19 @@ class MediaMetadatum {
     this.id,
   });
 
-  factory MediaMetadatum.fromJson(String str) =>
-      MediaMetadatum.fromMap(json.decode(str));
+  factory RedditMediaMetadatum.fromJson(String str) =>
+      RedditMediaMetadatum.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory MediaMetadatum.fromMap(Map<String, dynamic> json) => MediaMetadatum(
+  factory RedditMediaMetadatum.fromMap(Map<String, dynamic> json) => RedditMediaMetadatum(
         status: json["status"],
         e: json["e"],
         m: json["m"],
         p: json["p"] == null
             ? []
-            : List<S>.from(json["p"]!.map((x) => S.fromMap(x))),
-        s: json["s"] == null ? null : S.fromMap(json["s"]),
+            : List<RedditS>.from(json["p"]!.map((x) => RedditS.fromMap(x))),
+        s: json["s"] == null ? null : RedditS.fromMap(json["s"]),
         id: json["id"],
       );
 
@@ -1036,22 +1036,22 @@ class MediaMetadatum {
       };
 }
 
-class S {
+class RedditS {
   final int? y;
   final int? x;
   final String? u;
 
-  S({
+  RedditS({
     this.y,
     this.x,
     this.u,
   });
 
-  factory S.fromJson(String str) => S.fromMap(json.decode(str));
+  factory RedditS.fromJson(String str) => RedditS.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory S.fromMap(Map<String, dynamic> json) => S(
+  factory RedditS.fromMap(Map<String, dynamic> json) => RedditS(
         y: json["y"],
         x: json["x"],
         u: json["u"],
@@ -1066,34 +1066,34 @@ class S {
 
 enum WhitelistStatus { allAds, someAds }
 
-final whitelistStatusValues = EnumValues(
+final whitelistStatusValues = RedditEnumValues(
     {"all_ads": WhitelistStatus.allAds, "some_ads": WhitelistStatus.someAds});
 
 enum PostHint { image, hostedVideo, link }
 
-final postHintValues = EnumValues({
+final postHintValues = RedditEnumValues({
   "hosted:video": PostHint.hostedVideo,
   "image": PostHint.image,
   "link": PostHint.link
 });
 
-class Preview {
-  final List<Image>? images;
+class RedditPreview {
+  final List<RedditImage>? images;
   final bool? enabled;
 
-  Preview({
+  RedditPreview({
     this.images,
     this.enabled,
   });
 
-  factory Preview.fromJson(String str) => Preview.fromMap(json.decode(str));
+  factory RedditPreview.fromJson(String str) => RedditPreview.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Preview.fromMap(Map<String, dynamic> json) => Preview(
+  factory RedditPreview.fromMap(Map<String, dynamic> json) => RedditPreview(
         images: json["images"] == null
             ? []
-            : List<Image>.from(json["images"]!.map((x) => Image.fromMap(x))),
+            : List<RedditImage>.from(json["images"]!.map((x) => RedditImage.fromMap(x))),
         enabled: json["enabled"],
       );
 
@@ -1105,33 +1105,33 @@ class Preview {
       };
 }
 
-class Image {
-  final ResizedIcon? source;
-  final List<ResizedIcon>? resolutions;
-  final MediaEmbed? variants;
+class RedditImage {
+  final RedditResizedIcon? source;
+  final List<RedditResizedIcon>? resolutions;
+  final RedditMediaEmbed? variants;
   final String? id;
 
-  Image({
+  RedditImage({
     this.source,
     this.resolutions,
     this.variants,
     this.id,
   });
 
-  factory Image.fromJson(String str) => Image.fromMap(json.decode(str));
+  factory RedditImage.fromJson(String str) => RedditImage.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Image.fromMap(Map<String, dynamic> json) => Image(
+  factory RedditImage.fromMap(Map<String, dynamic> json) => RedditImage(
         source:
-            json["source"] == null ? null : ResizedIcon.fromMap(json["source"]),
+            json["source"] == null ? null : RedditResizedIcon.fromMap(json["source"]),
         resolutions: json["resolutions"] == null
             ? []
-            : List<ResizedIcon>.from(
-                json["resolutions"]!.map((x) => ResizedIcon.fromMap(x))),
+            : List<RedditResizedIcon>.from(
+                json["resolutions"]!.map((x) => RedditResizedIcon.fromMap(x))),
         variants: json["variants"] == null
             ? null
-            : MediaEmbed.fromMap(json["variants"]),
+            : RedditMediaEmbed.fromMap(json["variants"]),
         id: json["id"],
       );
 
@@ -1147,17 +1147,17 @@ class Image {
 
 enum SubredditType { public }
 
-final subredditTypeValues = EnumValues({"public": SubredditType.public});
+final subredditTypeValues = RedditEnumValues({"public": SubredditType.public});
 
 enum Kind { t3 }
 
-final kindValues = EnumValues({"t3": Kind.t3});
+final kindValues = RedditEnumValues({"t3": Kind.t3});
 
-class EnumValues<T> {
+class RedditEnumValues<T> {
   Map<String, T> map;
   late Map<T, String> reverseMap;
 
-  EnumValues(this.map);
+  RedditEnumValues(this.map);
 
   Map<T, String> get reverse {
     reverseMap = map.map((k, v) => MapEntry(v, k));

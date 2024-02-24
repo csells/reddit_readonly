@@ -1,6 +1,6 @@
 name: reddit_readonly
 description: client for reddit read-only REST API
-version: 0.2.1
+version: 0.2.2
 
 environment:
   sdk: ">=3.1.0 <4.0.0"
