@@ -1,3 +1,7 @@
+## 0.2.3
+
+- implemented getSubmission properly
+
 ## 0.2.2
 
 - updated more names for usability, e.g. Data => RedditData

@@ -4,13 +4,15 @@ void main() async {
   final client = RedditClient();
   // final domain = 'sellsbrothers.com';
 
-  // final resp = await client.getSubmissions(subreddit: 'programming');
+  // final resp = await client.getSubmissions(subreddit: 'DungeonCrawlerCarl');
+  // final resp = await client.getSubmission('1ayza19');
   // print(resp.posts![0].data!.id);
   // print(resp.posts![0].data!.title);
+  // print(resp.posts![0].data!.selftext);
   // return;
 
   final futures = [
-    client.getSubmissionComments('18zyybw'),
+    // client.getSubmissionComments('18zyybw'),
     // client.getSubmissions(subreddit: 'programming'),
     // client.getDefaultSubreddits(),
     // client.getDomainBest(domain),
@@ -20,8 +22,8 @@ void main() async {
     // client.getDomainRising(domain),
     // client.getDomainTop(domain),
     // client.getLiveThread(id),
-    // client.getSubmissionComments('173viwj'),
-    //client.getSubmission('18zyybw')
+    // client.getSubmissionComments('1ayza19'),
+    client.getSubmission('1ayza19')
   ];
 
   for (final future in futures) {

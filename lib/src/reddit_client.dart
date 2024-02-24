@@ -220,7 +220,7 @@ class RedditClient {
   }
 
   Future<RedditResponse> getSubmission(String id) async {
-    final response = await http.get(Uri.parse("$host/by_id/$id.json"));
+    final response = await http.get(Uri.parse("$host/comments/$id.json"));
     return _processResponse(response);
   }
 
