@@ -1,3 +1,7 @@
+## 0.2.4
+
+- paged submissions
+
 ## 0.2.3
 
 - implemented getSubmission properly

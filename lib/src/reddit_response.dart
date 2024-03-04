@@ -4,6 +4,8 @@ class RedditResponse {
   final String? after;
   final List<RedditPost>? posts;
 
+  // NOTE: `after` is the same as:
+  // '${resp.posts!.last.kind!.name}_${resp.posts!.last.data!.id}'
   RedditResponse({
     this.after,
     this.posts,
