@@ -174,14 +174,17 @@ class RedditClient {
 
   Future<RedditResponse> searchSubmissions(
     String query, {
+    String? subreddit,
     Map<String, dynamic>? options,
   }) async {
     options = options ?? {};
     options['q'] = query;
     options['type'] = 'link';
 
-    final response = await http
-        .get(Uri.parse('$host/search.json?${_mapToUrlParams(options)}'));
+    subreddit = subreddit != null ? '/r/$subreddit' : '';
+
+    final response = await http.get(
+        Uri.parse('$host$subreddit/search.json?${_mapToUrlParams(options)}'));
     return _processResponse(response);
   }
 
