@@ -43,7 +43,6 @@ void main() async {
   // dumpResponse(resp5);
 
   // search submissions
-  // TODO: this does NOT filter but subreddit -- fix it!
   final resp6 = await client.searchSubmissions(
     'dart',
     subreddit: 'programming',

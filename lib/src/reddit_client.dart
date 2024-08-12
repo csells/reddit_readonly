@@ -12,11 +12,11 @@ class RedditClient {
     'limit': 25,
     'include_over_18': true,
   };
-  final Map<String, dynamic> searchParams = {
-    'limit': 25,
-    'include_over_18': true,
-    'type': 'sr,link,user',
-  };
+  // final Map<String, dynamic> searchParams = {
+  //   'limit': 25,
+  //   'include_over_18': true,
+  //   'type': 'sr,link,user',
+  // };
 
   Future<RedditResponse> getSubmissions({
     String? sort,
@@ -180,8 +180,10 @@ class RedditClient {
     options = options ?? {};
     options['q'] = query;
     options['type'] = 'link';
+    options.addAll(parameters);
 
     subreddit = subreddit != null ? '/r/$subreddit' : '';
+    if (subreddit.isNotEmpty) options['restrict_sr'] = 'on';
 
     final url = '$host$subreddit/search.json?${_mapToUrlParams(options)}';
     final response = await http.get(Uri.parse(url));
