@@ -9,7 +9,10 @@ void main() async {
   // paged submissions
   final resp = await client.getSubmissions(subreddit: 'DungeonCrawlerCarl');
   for (final post in resp.posts!) {
-    print('${post.data!.id}: ${post.data!.title!}');
+    final created = DateTime.fromMillisecondsSinceEpoch(
+      (post.data!.created! * 1000).toInt(),
+    );
+    print('${post.data!.id}: ${post.data!.title!} ($created)');
   }
 
   final after = '${resp.posts!.last.kind!.name}_${resp.posts!.last.data!.id}';
@@ -23,7 +26,10 @@ void main() async {
   // final resp2 = await client.getSubmissions(
   //     subreddit: 'DungeonCrawlerCarl', options: {'after': after});
   for (final post in resp2.posts!) {
-    print('${post.data!.id}: ${post.data!.title!}');
+    final created = DateTime.fromMillisecondsSinceEpoch(
+      (post.data!.created! * 1000).toInt(),
+    );
+    print('${post.data!.id}: ${post.data!.title!} ($created)');
   }
   final resp3 = await client.getSubmission('1ayza19');
   print(resp3.posts![0].data!.id);
