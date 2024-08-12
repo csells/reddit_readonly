@@ -183,8 +183,8 @@ class RedditClient {
 
     subreddit = subreddit != null ? '/r/$subreddit' : '';
 
-    final response = await http.get(
-        Uri.parse('$host$subreddit/search.json?${_mapToUrlParams(options)}'));
+    final url = '$host$subreddit/search.json?${_mapToUrlParams(options)}';
+    final response = await http.get(Uri.parse(url));
     return _processResponse(response);
   }
 
@@ -276,10 +276,13 @@ class RedditClient {
 
   Future<RedditResponse> getUserSubmissions(
     String username, {
+    String? subreddit,
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/user/$username/submitted.json?${_mapToUrlParams(options ?? parameters)}'));
+    subreddit = subreddit != null ? '/r/$subreddit' : '';
+    final url =
+        '$host$subreddit/user/$username/submitted.json?${_mapToUrlParams(options ?? parameters)}';
+    final response = await http.get(Uri.parse(url));
     return _processResponse(response);
   }
 
