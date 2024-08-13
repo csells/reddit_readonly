@@ -220,7 +220,7 @@ class RedditData {
       modReasonTitle: json['mod_reason_title'],
       gilded: json['gilded'],
       clicked: json['clicked'],
-      title: json['title'],
+      title: (json['title'] as String).trim(),
       linkFlairRichtext: linkFlairRichtext,
       subredditNamePrefixed: json['subreddit_name_prefixed'],
       hidden: json['hidden'],
