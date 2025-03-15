@@ -57,7 +57,7 @@ void main() async {
   dumpResponse(resp6);
 
   const domain = 'sellsbrothers.com';
-  final futures = [
+  final futures = <Future<RedditResponse>>[
     client.getSubmissionComments('18zyybw'),
     client.getSubmissions(subreddit: 'programming'),
     client.getDefaultSubreddits(),

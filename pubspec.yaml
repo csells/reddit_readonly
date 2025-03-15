@@ -3,7 +3,7 @@ description: client for reddit read-only REST API
 version: 0.2.5
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
+  sdk: ^3.7.0
 
 dependencies:
   http: ^1.1.0
