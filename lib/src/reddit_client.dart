@@ -23,16 +23,16 @@ class RedditClient {
     String? subreddit,
     Map<String, dynamic>? options,
   }) async {
-    final params = <String, dynamic>{
-      'limit': 25,
-      'include_over_18': true,
-    };
+    final params = <String, dynamic>{'limit': 25, 'include_over_18': true};
 
     sort = sort ?? 'hot';
     subreddit = subreddit != null ? '/r/$subreddit' : '';
 
-    final response = await http.get(Uri.parse(
-        '$host$subreddit/$sort.json?${_mapToUrlParams(params..addAll(options ?? {}))}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host$subreddit/$sort.json?${_mapToUrlParams(params..addAll(options ?? {}))}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -40,8 +40,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/hot.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/hot.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -49,8 +52,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/best.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/best.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -58,8 +64,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/top.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/top.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -67,8 +76,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/new.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/new.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -76,8 +88,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/rising.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/rising.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -85,8 +100,11 @@ class RedditClient {
     String domain, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/domain/$domain/controversial.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/domain/$domain/controversial.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -96,20 +114,23 @@ class RedditClient {
   }
 
   Future<RedditResponse> getSubredditRules(String subreddit) async {
-    final response =
-        await http.get(Uri.parse('$host/r/$subreddit/about/rules.json'));
+    final response = await http.get(
+      Uri.parse('$host/r/$subreddit/about/rules.json'),
+    );
     return _processResponse(response);
   }
 
   Future<RedditResponse> getSubredditModerators(String subreddit) async {
-    final response =
-        await http.get(Uri.parse('$host/r/$subreddit/about/moderators.json'));
+    final response = await http.get(
+      Uri.parse('$host/r/$subreddit/about/moderators.json'),
+    );
     return _processResponse(response);
   }
 
   Future<RedditResponse> getSubredditWikiPages(String subreddit) async {
-    final response =
-        await http.get(Uri.parse('$host/r/$subreddit/wiki/pages.json'));
+    final response = await http.get(
+      Uri.parse('$host/r/$subreddit/wiki/pages.json'),
+    );
     return _processResponse(response);
   }
 
@@ -117,8 +138,9 @@ class RedditClient {
     String subreddit,
     String page,
   ) async {
-    final response =
-        await http.get(Uri.parse('$host/r/$subreddit/wiki/$page.json'));
+    final response = await http.get(
+      Uri.parse('$host/r/$subreddit/wiki/$page.json'),
+    );
     return _processResponse(response);
   }
 
@@ -126,49 +148,73 @@ class RedditClient {
     String subreddit,
     String page,
   ) async {
-    final response = await http
-        .get(Uri.parse('$host/r/$subreddit/wiki/revisions$page.json'));
+    final response = await http.get(
+      Uri.parse('$host/r/$subreddit/wiki/revisions$page.json'),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getPopularSubreddits(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/subreddits/popular.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getPopularSubreddits({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/subreddits/popular.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getNewSubreddits(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/subreddits/new.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getNewSubreddits({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/subreddits/new.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getPremiumSubreddits(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/subreddits/premium.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getPremiumSubreddits({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/subreddits/premium.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getDefaultSubreddits(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/subreddits/default.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getDefaultSubreddits({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/subreddits/default.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getPopularUsers(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/users/popular.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getPopularUsers({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/users/popular.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
   Future<RedditResponse> getNewUsers({Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/users/new.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/users/new.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -198,7 +244,8 @@ class RedditClient {
     options['q'] = query;
 
     final response = await http.get(
-        Uri.parse('$host/subreddits/search.json?${_mapToUrlParams(options)}'));
+      Uri.parse('$host/subreddits/search.json?${_mapToUrlParams(options)}'),
+    );
     return _processResponse(response);
   }
 
@@ -209,8 +256,9 @@ class RedditClient {
     options = options ?? {};
     options['q'] = query;
 
-    final response = await http
-        .get(Uri.parse('$host/users/search.json?${_mapToUrlParams(options)}'));
+    final response = await http.get(
+      Uri.parse('$host/users/search.json?${_mapToUrlParams(options)}'),
+    );
     return _processResponse(response);
   }
 
@@ -224,7 +272,8 @@ class RedditClient {
     subreddit = subreddit != null ? '/r/$subreddit' : '';
 
     final response = await http.get(
-        Uri.parse('$host$subreddit/search.json?${_mapToUrlParams(options)}'));
+      Uri.parse('$host$subreddit/search.json?${_mapToUrlParams(options)}'),
+    );
     return _processResponse(response);
   }
 
@@ -238,7 +287,8 @@ class RedditClient {
     Map<String, dynamic>? options,
   }) async {
     final url = Uri.parse(
-        '$host/comments/$id.json?${_mapToUrlParams(options ?? parameters)}');
+      '$host/comments/$id.json?${_mapToUrlParams(options ?? parameters)}',
+    );
     final response = await http.get(url);
     return _processResponse(response);
   }
@@ -247,14 +297,18 @@ class RedditClient {
     String subreddit, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/r/$subreddit/comments.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/r/$subreddit/comments.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
   Future<RedditResponse> getUser(String username) async {
-    final response =
-        await http.get(Uri.parse('$host/user/$username/about.json'));
+    final response = await http.get(
+      Uri.parse('$host/user/$username/about.json'),
+    );
     return _processResponse(response);
   }
 
@@ -262,8 +316,11 @@ class RedditClient {
     String username, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/user/$username/overview.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/user/$username/overview.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -271,8 +328,11 @@ class RedditClient {
     String username, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/user/$username/comments.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/user/$username/comments.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -297,8 +357,11 @@ class RedditClient {
     String id, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/live/$id.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/live/$id.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -306,8 +369,11 @@ class RedditClient {
     String id, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/live/$id/contributors.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/live/$id/contributors.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
@@ -315,21 +381,29 @@ class RedditClient {
     String id, {
     Map<String, dynamic>? options,
   }) async {
-    final response = await http.get(Uri.parse(
-        '$host/live/$id/discussions.json?${_mapToUrlParams(options ?? parameters)}'));
+    final response = await http.get(
+      Uri.parse(
+        '$host/live/$id/discussions.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
-  Future<RedditResponse> getLiveThreadsNow(
-      {Map<String, dynamic>? options}) async {
-    final response = await http.get(Uri.parse(
-        '$host/live/happening_now.json?${_mapToUrlParams(options ?? parameters)}'));
+  Future<RedditResponse> getLiveThreadsNow({
+    Map<String, dynamic>? options,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        '$host/live/happening_now.json?${_mapToUrlParams(options ?? parameters)}',
+      ),
+    );
     return _processResponse(response);
   }
 
   String _mapToUrlParams(Map<String, dynamic> params) => params.entries
       .map(
-        (e) => '${Uri.encodeComponent(e.key)}='
+        (e) =>
+            '${Uri.encodeComponent(e.key)}='
             '${Uri.encodeComponent(e.value.toString())}',
       )
       .join('&');

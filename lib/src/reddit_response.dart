@@ -5,10 +5,7 @@ import 'dart:convert';
 class RedditResponse {
   // NOTE: `after` is the same as:
   // '${resp.posts!.last.kind!.name}_${resp.posts!.last.data!.id}'
-  RedditResponse({
-    this.after,
-    this.posts,
-  });
+  RedditResponse({this.after, this.posts});
 
   factory RedditResponse.fromJson(String str) =>
       RedditResponse.fromMap(json.decode(str));
@@ -21,10 +18,7 @@ class RedditResponse {
       }
     }
 
-    return RedditResponse(
-      after: json['after'],
-      posts: posts,
-    );
+    return RedditResponse(after: json['after'], posts: posts);
   }
 
   final String? after;
@@ -33,10 +27,10 @@ class RedditResponse {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        if (after != null) 'after': after,
-        if (posts != null)
-          'posts': List<dynamic>.from(posts!.map((x) => x.toMap())),
-      };
+    if (after != null) 'after': after,
+    if (posts != null)
+      'posts': List<dynamic>.from(posts!.map((x) => x.toMap())),
+  };
 
   static const pp = JsonEncoder.withIndent('  ');
 
@@ -45,27 +39,24 @@ class RedditResponse {
 }
 
 class RedditPost {
-  RedditPost({
-    this.kind,
-    this.data,
-  });
+  RedditPost({this.kind, this.data});
 
   factory RedditPost.fromJson(String str) =>
       RedditPost.fromMap(json.decode(str));
 
   factory RedditPost.fromMap(Map<String, dynamic> json) => RedditPost(
-        kind: kindValues.map[json['kind']],
-        data: json['data'] == null ? null : RedditData.fromMap(json['data']),
-      );
+    kind: kindValues.map[json['kind']],
+    data: json['data'] == null ? null : RedditData.fromMap(json['data']),
+  );
   final Kind? kind;
   final RedditData? data;
 
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'kind': kindValues.reverse[kind],
-        if (data != null) 'data': data?.toMap(),
-      };
+    'kind': kindValues.reverse[kind],
+    if (data != null) 'data': data?.toMap(),
+  };
 }
 
 class RedditData {
@@ -243,12 +234,14 @@ class RedditData {
       thumbnailWidth: json['thumbnail_width'],
       authorFlairTemplateId: json['author_flair_template_id'],
       isOriginalContent: json['is_original_content'],
-      userReports: json['user_reports'] == null
-          ? []
-          : List<dynamic>.from(json['user_reports']!.map((x) => x)),
-      secureMedia: json['secure_media'] == null
-          ? null
-          : RedditMedia.fromMap(json['secure_media']),
+      userReports:
+          json['user_reports'] == null
+              ? []
+              : List<dynamic>.from(json['user_reports']!.map((x) => x)),
+      secureMedia:
+          json['secure_media'] == null
+              ? null
+              : RedditMedia.fromMap(json['secure_media']),
       isRedditMediaDomain: json['is_reddit_media_domain'],
       isMeta: json['is_meta'],
       category: json['category'],
@@ -263,9 +256,10 @@ class RedditData {
       edited: json['edited'],
       authorFlairCssClass: json['author_flair_css_class'],
       authorFlairRichtext: authorFlairRichtext,
-      gildings: json['gildings'] == null
-          ? null
-          : RedditGildings.fromMap(json['gildings']),
+      gildings:
+          json['gildings'] == null
+              ? null
+              : RedditGildings.fromMap(json['gildings']),
       contentCategories: json['content_categories'],
       isSelf: json['is_self'],
       modNote: json['mod_note'],
@@ -288,17 +282,19 @@ class RedditData {
       pinned: json['pinned'],
       over18: json['over_18'],
       allAwardings: allAwardings,
-      awarders: json['awarders'] == null
-          ? []
-          : List<dynamic>.from(json['awarders']!.map((x) => x)),
+      awarders:
+          json['awarders'] == null
+              ? []
+              : List<dynamic>.from(json['awarders']!.map((x) => x)),
       mediaOnly: json['media_only'],
       canGild: json['can_gild'],
       spoiler: json['spoiler'],
       locked: json['locked'],
       authorFlairText: json['author_flair_text'],
-      treatmentTags: json['treatment_tags'] == null
-          ? []
-          : List<dynamic>.from(json['treatment_tags']!.map((x) => x)),
+      treatmentTags:
+          json['treatment_tags'] == null
+              ? []
+              : List<dynamic>.from(json['treatment_tags']!.map((x) => x)),
       visited: json['visited'],
       removedBy: json['removed_by'],
       numReports: json['num_reports'],
@@ -317,9 +313,10 @@ class RedditData {
       sendReplies: json['send_replies'],
       whitelistStatus: whitelistStatusValues.map[json['whitelist_status']],
       contestMode: json['contest_mode'],
-      modReports: json['mod_reports'] == null
-          ? []
-          : List<dynamic>.from(json['mod_reports']!.map((x) => x)),
+      modReports:
+          json['mod_reports'] == null
+              ? []
+              : List<dynamic>.from(json['mod_reports']!.map((x) => x)),
       authorPatreonFlair: json['author_patreon_flair'],
       authorFlairTextColor:
           flairTextColorValues.map[json['author_flair_text_color']],
@@ -335,17 +332,22 @@ class RedditData {
       isVideo: json['is_video'],
       postHint: postHintValues.map[json['post_hint']],
       urlOverriddenByDest: json['url_overridden_by_dest'],
-      preview: json['preview'] == null
-          ? null
-          : RedditPreview.fromMap(json['preview']),
+      preview:
+          json['preview'] == null
+              ? null
+              : RedditPreview.fromMap(json['preview']),
       linkFlairTemplateId: json['link_flair_template_id'],
       isGallery: json['is_gallery'],
-      mediaMetadata: Map.from(json['media_metadata'] ?? {}).map((k, v) =>
-          MapEntry<String, RedditMediaMetadatum>(
-              k, RedditMediaMetadatum.fromMap(v))),
-      galleryData: json['gallery_data'] == null
-          ? null
-          : RedditGalleryData.fromMap(json['gallery_data']),
+      mediaMetadata: Map.from(json['media_metadata'] ?? {}).map(
+        (k, v) => MapEntry<String, RedditMediaMetadatum>(
+          k,
+          RedditMediaMetadatum.fromMap(v),
+        ),
+      ),
+      galleryData:
+          json['gallery_data'] == null
+              ? null
+              : RedditGalleryData.fromMap(json['gallery_data']),
     );
   }
   final dynamic approvedAtUtc;
@@ -466,141 +468,142 @@ class RedditData {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        if (approvedAtUtc != null) 'approved_at_utc': approvedAtUtc,
-        if (subreddit != null) 'subreddit': subreddit,
-        if (selftext != null) 'selftext': selftext,
-        if (authorFullname != null) 'author_fullname': authorFullname,
-        if (saved != null) 'saved': saved,
-        if (modReasonTitle != null) 'mod_reason_title': modReasonTitle,
-        if (gilded != null) 'gilded': gilded,
-        if (clicked != null) 'clicked': clicked,
-        if (title != null) 'title': title,
-        if (linkFlairRichtext != null)
-          'link_flair_richtext':
-              linkFlairRichtext!.map((x) => x.toMap()).toList(),
-        'subreddit_name_prefixed': subredditNamePrefixed,
-        'hidden': hidden,
-        'pwls': pwls,
-        'link_flair_css_class': linkFlairCssClass,
-        'downs': downs,
-        'thumbnail_height': thumbnailHeight,
-        'top_awarded_type': topAwardedType,
-        'hide_score': hideScore,
-        'name': name,
-        'quarantine': quarantine,
-        'link_flair_text_color':
-            flairTextColorValues.reverse[linkFlairTextColor],
-        'upvote_ratio': upvoteRatio,
-        'author_flair_background_color': authorFlairBackgroundColor,
-        'subreddit_type': subredditTypeValues.reverse[subredditType],
-        'ups': ups,
-        'total_awards_received': totalAwardsReceived,
-        'media_embed': mediaEmbed == null
-            ? []
-            : List<dynamic>.from(mediaEmbed!.map((x) => x)),
-        'thumbnail_width': thumbnailWidth,
-        'author_flair_template_id': authorFlairTemplateId,
-        'is_original_content': isOriginalContent,
-        'user_reports': userReports == null
+    if (approvedAtUtc != null) 'approved_at_utc': approvedAtUtc,
+    if (subreddit != null) 'subreddit': subreddit,
+    if (selftext != null) 'selftext': selftext,
+    if (authorFullname != null) 'author_fullname': authorFullname,
+    if (saved != null) 'saved': saved,
+    if (modReasonTitle != null) 'mod_reason_title': modReasonTitle,
+    if (gilded != null) 'gilded': gilded,
+    if (clicked != null) 'clicked': clicked,
+    if (title != null) 'title': title,
+    if (linkFlairRichtext != null)
+      'link_flair_richtext': linkFlairRichtext!.map((x) => x.toMap()).toList(),
+    'subreddit_name_prefixed': subredditNamePrefixed,
+    'hidden': hidden,
+    'pwls': pwls,
+    'link_flair_css_class': linkFlairCssClass,
+    'downs': downs,
+    'thumbnail_height': thumbnailHeight,
+    'top_awarded_type': topAwardedType,
+    'hide_score': hideScore,
+    'name': name,
+    'quarantine': quarantine,
+    'link_flair_text_color': flairTextColorValues.reverse[linkFlairTextColor],
+    'upvote_ratio': upvoteRatio,
+    'author_flair_background_color': authorFlairBackgroundColor,
+    'subreddit_type': subredditTypeValues.reverse[subredditType],
+    'ups': ups,
+    'total_awards_received': totalAwardsReceived,
+    'media_embed':
+        mediaEmbed == null ? [] : List<dynamic>.from(mediaEmbed!.map((x) => x)),
+    'thumbnail_width': thumbnailWidth,
+    'author_flair_template_id': authorFlairTemplateId,
+    'is_original_content': isOriginalContent,
+    'user_reports':
+        userReports == null
             ? []
             : List<dynamic>.from(userReports!.map((x) => x)),
-        'secure_media': secureMedia?.toMap(),
-        'is_reddit_media_domain': isRedditMediaDomain,
-        'is_meta': isMeta,
-        'category': category,
-        'secure_media_embed': secureMediaEmbed?.toMap(),
-        'link_flair_text': linkFlairText,
-        'can_mod_post': canModPost,
-        'score': score,
-        'approved_by': approvedBy,
-        'is_created_from_ads_ui': isCreatedFromAdsUi,
-        'author_premium': authorPremium,
-        if (thumbnail != null) 'thumbnail': thumbnail,
-        if (authorCakeday != null) 'author_cakeday': authorCakeday,
-        if (edited != null) 'edited': edited,
-        'author_flair_css_class': authorFlairCssClass,
-        'author_flair_richtext': authorFlairRichtext == null
+    'secure_media': secureMedia?.toMap(),
+    'is_reddit_media_domain': isRedditMediaDomain,
+    'is_meta': isMeta,
+    'category': category,
+    'secure_media_embed': secureMediaEmbed?.toMap(),
+    'link_flair_text': linkFlairText,
+    'can_mod_post': canModPost,
+    'score': score,
+    'approved_by': approvedBy,
+    'is_created_from_ads_ui': isCreatedFromAdsUi,
+    'author_premium': authorPremium,
+    if (thumbnail != null) 'thumbnail': thumbnail,
+    if (authorCakeday != null) 'author_cakeday': authorCakeday,
+    if (edited != null) 'edited': edited,
+    'author_flair_css_class': authorFlairCssClass,
+    'author_flair_richtext':
+        authorFlairRichtext == null
             ? []
             : List<dynamic>.from(authorFlairRichtext!.map((x) => x.toMap())),
-        'gildings': gildings?.toMap(),
-        'content_categories': contentCategories,
-        'is_self': isSelf,
-        'mod_note': modNote,
-        'created': created,
-        'link_flair_type': flairTypeValues.reverse[linkFlairType],
-        'wls': wls,
-        'removed_by_category': removedByCategory,
-        'banned_by': bannedBy,
-        'author_flair_type': flairTypeValues.reverse[authorFlairType],
-        'domain': domain,
-        'allow_live_comments': allowLiveComments,
-        'selftext_html': selftextHtml,
-        'likes': likes,
-        'suggested_sort': suggestedSort,
-        'banned_at_utc': bannedAtUtc,
-        'view_count': viewCount,
-        'archived': archived,
-        'no_follow': noFollow,
-        'is_crosspostable': isCrosspostable,
-        'pinned': pinned,
-        'over_18': over18,
-        'all_awardings': allAwardings == null
+    'gildings': gildings?.toMap(),
+    'content_categories': contentCategories,
+    'is_self': isSelf,
+    'mod_note': modNote,
+    'created': created,
+    'link_flair_type': flairTypeValues.reverse[linkFlairType],
+    'wls': wls,
+    'removed_by_category': removedByCategory,
+    'banned_by': bannedBy,
+    'author_flair_type': flairTypeValues.reverse[authorFlairType],
+    'domain': domain,
+    'allow_live_comments': allowLiveComments,
+    'selftext_html': selftextHtml,
+    'likes': likes,
+    'suggested_sort': suggestedSort,
+    'banned_at_utc': bannedAtUtc,
+    'view_count': viewCount,
+    'archived': archived,
+    'no_follow': noFollow,
+    'is_crosspostable': isCrosspostable,
+    'pinned': pinned,
+    'over_18': over18,
+    'all_awardings':
+        allAwardings == null
             ? []
             : List<dynamic>.from(allAwardings!.map((x) => x.toMap())),
-        'awarders':
-            awarders == null ? [] : List<dynamic>.from(awarders!.map((x) => x)),
-        'media_only': mediaOnly,
-        'can_gild': canGild,
-        'spoiler': spoiler,
-        'locked': locked,
-        'author_flair_text': authorFlairText,
-        'treatment_tags': treatmentTags == null
+    'awarders':
+        awarders == null ? [] : List<dynamic>.from(awarders!.map((x) => x)),
+    'media_only': mediaOnly,
+    'can_gild': canGild,
+    'spoiler': spoiler,
+    'locked': locked,
+    'author_flair_text': authorFlairText,
+    'treatment_tags':
+        treatmentTags == null
             ? []
             : List<dynamic>.from(treatmentTags!.map((x) => x)),
-        'visited': visited,
-        'removed_by': removedBy,
-        'num_reports': numReports,
-        'distinguished': distinguished,
-        'subreddit_id': subredditId,
-        'author_is_blocked': authorIsBlocked,
-        'mod_reason_by': modReasonBy,
-        if (removalReason != null) 'removal_reason': removalReason,
-        if (linkFlairBackgroundColor != null)
-          'link_flair_background_color': linkFlairBackgroundColor,
-        if (id != null) 'id': id,
-        'is_robot_indexable': isRobotIndexable,
-        'report_reasons': reportReasons,
-        'author': author,
-        'discussion_type': discussionType,
-        'num_comments': numComments,
-        'send_replies': sendReplies,
-        'whitelist_status': whitelistStatusValues.reverse[whitelistStatus],
-        'contest_mode': contestMode,
-        'mod_reports': modReports == null
-            ? []
-            : List<dynamic>.from(modReports!.map((x) => x)),
-        'author_patreon_flair': authorPatreonFlair,
-        'author_flair_text_color':
-            flairTextColorValues.reverse[authorFlairTextColor],
-        'permalink': permalink,
-        'parent_whitelist_status':
-            whitelistStatusValues.reverse[parentWhitelistStatus],
-        'stickied': stickied,
-        'url': url,
-        'subreddit_subscribers': subredditSubscribers,
-        'created_utc': createdUtc,
-        'num_crossposts': numCrossposts,
-        'media': media?.toMap(),
-        'is_video': isVideo,
-        'post_hint': postHintValues.reverse[postHint],
-        'url_overridden_by_dest': urlOverriddenByDest,
-        'preview': preview?.toMap(),
-        'link_flair_template_id': linkFlairTemplateId,
-        'is_gallery': isGallery,
-        'media_metadata': Map.from(mediaMetadata!)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toMap())),
-        'gallery_data': galleryData?.toMap(),
-      };
+    'visited': visited,
+    'removed_by': removedBy,
+    'num_reports': numReports,
+    'distinguished': distinguished,
+    'subreddit_id': subredditId,
+    'author_is_blocked': authorIsBlocked,
+    'mod_reason_by': modReasonBy,
+    if (removalReason != null) 'removal_reason': removalReason,
+    if (linkFlairBackgroundColor != null)
+      'link_flair_background_color': linkFlairBackgroundColor,
+    if (id != null) 'id': id,
+    'is_robot_indexable': isRobotIndexable,
+    'report_reasons': reportReasons,
+    'author': author,
+    'discussion_type': discussionType,
+    'num_comments': numComments,
+    'send_replies': sendReplies,
+    'whitelist_status': whitelistStatusValues.reverse[whitelistStatus],
+    'contest_mode': contestMode,
+    'mod_reports':
+        modReports == null ? [] : List<dynamic>.from(modReports!.map((x) => x)),
+    'author_patreon_flair': authorPatreonFlair,
+    'author_flair_text_color':
+        flairTextColorValues.reverse[authorFlairTextColor],
+    'permalink': permalink,
+    'parent_whitelist_status':
+        whitelistStatusValues.reverse[parentWhitelistStatus],
+    'stickied': stickied,
+    'url': url,
+    'subreddit_subscribers': subredditSubscribers,
+    'created_utc': createdUtc,
+    'num_crossposts': numCrossposts,
+    'media': media?.toMap(),
+    'is_video': isVideo,
+    'post_hint': postHintValues.reverse[postHint],
+    'url_overridden_by_dest': urlOverriddenByDest,
+    'preview': preview?.toMap(),
+    'link_flair_template_id': linkFlairTemplateId,
+    'is_gallery': isGallery,
+    'media_metadata': Map.from(
+      mediaMetadata!,
+    ).map((k, v) => MapEntry<String, dynamic>(k, v.toMap())),
+    'gallery_data': galleryData?.toMap(),
+  };
 }
 
 class RedditAllAwarding {
@@ -655,10 +658,12 @@ class RedditAllAwarding {
         iconUrl: json['icon_url'],
         daysOfPremium: json['days_of_premium'],
         tiersByRequiredAwardings: json['tiers_by_required_awardings'],
-        resizedIcons: json['resized_icons'] == null
-            ? []
-            : List<RedditResizedIcon>.from(
-                json['resized_icons']!.map(RedditResizedIcon.fromMap)),
+        resizedIcons:
+            json['resized_icons'] == null
+                ? []
+                : List<RedditResizedIcon>.from(
+                  json['resized_icons']!.map(RedditResizedIcon.fromMap),
+                ),
         iconWidth: json['icon_width'],
         staticIconWidth: json['static_icon_width'],
         startDate: json['start_date'],
@@ -672,10 +677,12 @@ class RedditAllAwarding {
         count: json['count'],
         staticIconHeight: json['static_icon_height'],
         name: json['name'],
-        resizedStaticIcons: json['resized_static_icons'] == null
-            ? []
-            : List<RedditResizedIcon>.from(
-                json['resized_static_icons']!.map(RedditResizedIcon.fromMap)),
+        resizedStaticIcons:
+            json['resized_static_icons'] == null
+                ? []
+                : List<RedditResizedIcon>.from(
+                  json['resized_static_icons']!.map(RedditResizedIcon.fromMap),
+                ),
         iconFormat: iconFormatValues.map[json['icon_format']],
         iconHeight: json['icon_height'],
         pennyPrice: json['penny_price'],
@@ -717,43 +724,44 @@ class RedditAllAwarding {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'giver_coin_reward': giverCoinReward,
-        'subreddit_id': subredditId,
-        'is_new': isNew,
-        'days_of_drip_extension': daysOfDripExtension,
-        'coin_price': coinPrice,
-        'id': id,
-        'penny_donate': pennyDonate,
-        'award_sub_type': awardSubTypeValues.reverse[awardSubType],
-        'coin_reward': coinReward,
-        'icon_url': iconUrl,
-        'days_of_premium': daysOfPremium,
-        'tiers_by_required_awardings': tiersByRequiredAwardings,
-        'resized_icons': resizedIcons == null
+    'giver_coin_reward': giverCoinReward,
+    'subreddit_id': subredditId,
+    'is_new': isNew,
+    'days_of_drip_extension': daysOfDripExtension,
+    'coin_price': coinPrice,
+    'id': id,
+    'penny_donate': pennyDonate,
+    'award_sub_type': awardSubTypeValues.reverse[awardSubType],
+    'coin_reward': coinReward,
+    'icon_url': iconUrl,
+    'days_of_premium': daysOfPremium,
+    'tiers_by_required_awardings': tiersByRequiredAwardings,
+    'resized_icons':
+        resizedIcons == null
             ? []
             : List<dynamic>.from(resizedIcons!.map((x) => x.toMap())),
-        'icon_width': iconWidth,
-        'static_icon_width': staticIconWidth,
-        'start_date': startDate,
-        'is_enabled': isEnabled,
-        'awardings_required_to_grant_benefits':
-            awardingsRequiredToGrantBenefits,
-        'description': description,
-        'end_date': endDate,
-        'sticky_duration_seconds': stickyDurationSeconds,
-        'subreddit_coin_reward': subredditCoinReward,
-        'count': count,
-        'static_icon_height': staticIconHeight,
-        'name': name,
-        'resized_static_icons': resizedStaticIcons == null
+    'icon_width': iconWidth,
+    'static_icon_width': staticIconWidth,
+    'start_date': startDate,
+    'is_enabled': isEnabled,
+    'awardings_required_to_grant_benefits': awardingsRequiredToGrantBenefits,
+    'description': description,
+    'end_date': endDate,
+    'sticky_duration_seconds': stickyDurationSeconds,
+    'subreddit_coin_reward': subredditCoinReward,
+    'count': count,
+    'static_icon_height': staticIconHeight,
+    'name': name,
+    'resized_static_icons':
+        resizedStaticIcons == null
             ? []
             : List<dynamic>.from(resizedStaticIcons!.map((x) => x.toMap())),
-        'icon_format': iconFormatValues.reverse[iconFormat],
-        'icon_height': iconHeight,
-        'penny_price': pennyPrice,
-        'award_type': awardTypeValues.reverse[awardType],
-        'static_icon_url': staticIconUrl,
-      };
+    'icon_format': iconFormatValues.reverse[iconFormat],
+    'icon_height': iconHeight,
+    'penny_price': pennyPrice,
+    'award_type': awardTypeValues.reverse[awardType],
+    'static_icon_url': staticIconUrl,
+  };
 }
 
 enum AwardSubType { appreciation, global, premium }
@@ -761,7 +769,7 @@ enum AwardSubType { appreciation, global, premium }
 final awardSubTypeValues = RedditEnumValues({
   'APPRECIATION': AwardSubType.appreciation,
   'GLOBAL': AwardSubType.global,
-  'PREMIUM': AwardSubType.premium
+  'PREMIUM': AwardSubType.premium,
 });
 
 enum AwardType { global }
@@ -770,15 +778,13 @@ final awardTypeValues = RedditEnumValues({'global': AwardType.global});
 
 enum IconFormat { apng, png }
 
-final iconFormatValues =
-    RedditEnumValues({'APNG': IconFormat.apng, 'PNG': IconFormat.png});
+final iconFormatValues = RedditEnumValues({
+  'APNG': IconFormat.apng,
+  'PNG': IconFormat.png,
+});
 
 class RedditResizedIcon {
-  RedditResizedIcon({
-    this.url,
-    this.width,
-    this.height,
-  });
+  RedditResizedIcon({this.url, this.width, this.height});
 
   factory RedditResizedIcon.fromJson(String str) =>
       RedditResizedIcon.fromMap(json.decode(str));
@@ -796,19 +802,14 @@ class RedditResizedIcon {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'url': url,
-        'width': width,
-        'height': height,
-      };
+    'url': url,
+    'width': width,
+    'height': height,
+  };
 }
 
 class RedditFlairRichtext {
-  RedditFlairRichtext({
-    this.a,
-    this.e,
-    this.u,
-    this.t,
-  });
+  RedditFlairRichtext({this.a, this.e, this.u, this.t});
 
   factory RedditFlairRichtext.fromJson(String str) =>
       RedditFlairRichtext.fromMap(json.decode(str));
@@ -827,28 +828,25 @@ class RedditFlairRichtext {
 
   String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toMap() => {
-        'a': a,
-        'e': e,
-        'u': u,
-        't': t,
-      };
+  Map<String, dynamic> toMap() => {'a': a, 'e': e, 'u': u, 't': t};
 }
 
 enum FlairTextColor { dark, light }
 
-final flairTextColorValues = RedditEnumValues(
-    {'dark': FlairTextColor.dark, 'light': FlairTextColor.light});
+final flairTextColorValues = RedditEnumValues({
+  'dark': FlairTextColor.dark,
+  'light': FlairTextColor.light,
+});
 
 enum FlairType { text, richtext }
 
-final flairTypeValues =
-    RedditEnumValues({'richtext': FlairType.richtext, 'text': FlairType.text});
+final flairTypeValues = RedditEnumValues({
+  'richtext': FlairType.richtext,
+  'text': FlairType.text,
+});
 
 class RedditGalleryData {
-  RedditGalleryData({
-    this.items,
-  });
+  RedditGalleryData({this.items});
 
   factory RedditGalleryData.fromJson(String str) =>
       RedditGalleryData.fromMap(json.decode(str));
@@ -861,85 +859,66 @@ class RedditGalleryData {
       }
     }
 
-    return RedditGalleryData(
-      items: items,
-    );
+    return RedditGalleryData(items: items);
   }
   final List<RedditItem>? items;
 
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'items': items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toMap())),
-      };
+    'items':
+        items == null ? [] : List<dynamic>.from(items!.map((x) => x.toMap())),
+  };
 }
 
 class RedditItem {
-  RedditItem({
-    this.mediaId,
-    this.id,
-  });
+  RedditItem({this.mediaId, this.id});
 
   factory RedditItem.fromJson(String str) =>
       RedditItem.fromMap(json.decode(str));
 
-  factory RedditItem.fromMap(Map<String, dynamic> json) => RedditItem(
-        mediaId: json['media_id'],
-        id: json['id'],
-      );
+  factory RedditItem.fromMap(Map<String, dynamic> json) =>
+      RedditItem(mediaId: json['media_id'], id: json['id']);
   final String? mediaId;
   final int? id;
 
   String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toMap() => {
-        'media_id': mediaId,
-        'id': id,
-      };
+  Map<String, dynamic> toMap() => {'media_id': mediaId, 'id': id};
 }
 
 class RedditGildings {
-  RedditGildings({
-    this.gid2,
-  });
+  RedditGildings({this.gid2});
 
   factory RedditGildings.fromJson(String str) =>
       RedditGildings.fromMap(json.decode(str));
 
-  factory RedditGildings.fromMap(Map<String, dynamic> json) => RedditGildings(
-        gid2: json['gid_2'],
-      );
+  factory RedditGildings.fromMap(Map<String, dynamic> json) =>
+      RedditGildings(gid2: json['gid_2']);
   final int? gid2;
 
   String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toMap() => {
-        'gid_2': gid2,
-      };
+  Map<String, dynamic> toMap() => {'gid_2': gid2};
 }
 
 class RedditMedia {
-  RedditMedia({
-    this.redditVideo,
-  });
+  RedditMedia({this.redditVideo});
 
   factory RedditMedia.fromJson(String str) =>
       RedditMedia.fromMap(json.decode(str));
 
   factory RedditMedia.fromMap(Map<String, dynamic> json) => RedditMedia(
-        redditVideo: json['reddit_video'] == null
+    redditVideo:
+        json['reddit_video'] == null
             ? null
             : RedditVideo.fromMap(json['reddit_video']),
-      );
+  );
   final RedditVideo? redditVideo;
 
   String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toMap() => {
-        'reddit_video': redditVideo?.toMap(),
-      };
+  Map<String, dynamic> toMap() => {'reddit_video': redditVideo?.toMap()};
 }
 
 class RedditVideo {
@@ -961,19 +940,18 @@ class RedditVideo {
       RedditVideo.fromMap(json.decode(str));
 
   factory RedditVideo.fromMap(Map<String, dynamic> json) => RedditVideo(
-        bitrateKbps: json['bitrate_kbps'],
-        fallbackUrl: json['fallback_url'],
-        hasAudio: json['has_audio'],
-        height: json['height'],
-        width: json['width'],
-        scrubberMediaUrl: json['scrubber_media_url'],
-        dashUrl: json['dash_url'],
-        duration: json['duration'],
-        hlsUrl: json['hls_url'],
-        isGif: json['is_gif'],
-        transcodingStatus:
-            transcodingStatusValues.map[json['transcoding_status']],
-      );
+    bitrateKbps: json['bitrate_kbps'],
+    fallbackUrl: json['fallback_url'],
+    hasAudio: json['has_audio'],
+    height: json['height'],
+    width: json['width'],
+    scrubberMediaUrl: json['scrubber_media_url'],
+    dashUrl: json['dash_url'],
+    duration: json['duration'],
+    hlsUrl: json['hls_url'],
+    isGif: json['is_gif'],
+    transcodingStatus: transcodingStatusValues.map[json['transcoding_status']],
+  );
   final int? bitrateKbps;
   final String? fallbackUrl;
   final bool? hasAudio;
@@ -989,25 +967,25 @@ class RedditVideo {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'bitrate_kbps': bitrateKbps,
-        'fallback_url': fallbackUrl,
-        'has_audio': hasAudio,
-        'height': height,
-        'width': width,
-        'scrubber_media_url': scrubberMediaUrl,
-        'dash_url': dashUrl,
-        'duration': duration,
-        'hls_url': hlsUrl,
-        'is_gif': isGif,
-        'transcoding_status':
-            transcodingStatusValues.reverse[transcodingStatus],
-      };
+    'bitrate_kbps': bitrateKbps,
+    'fallback_url': fallbackUrl,
+    'has_audio': hasAudio,
+    'height': height,
+    'width': width,
+    'scrubber_media_url': scrubberMediaUrl,
+    'dash_url': dashUrl,
+    'duration': duration,
+    'hls_url': hlsUrl,
+    'is_gif': isGif,
+    'transcoding_status': transcodingStatusValues.reverse[transcodingStatus],
+  };
 }
 
 enum TranscodingStatus { completed }
 
-final transcodingStatusValues =
-    RedditEnumValues({'completed': TranscodingStatus.completed});
+final transcodingStatusValues = RedditEnumValues({
+  'completed': TranscodingStatus.completed,
+});
 
 class RedditMediaEmbed {
   RedditMediaEmbed();
@@ -1024,14 +1002,7 @@ class RedditMediaEmbed {
 }
 
 class RedditMediaMetadatum {
-  RedditMediaMetadatum({
-    this.status,
-    this.e,
-    this.m,
-    this.p,
-    this.s,
-    this.id,
-  });
+  RedditMediaMetadatum({this.status, this.e, this.m, this.p, this.s, this.id});
 
   factory RedditMediaMetadatum.fromJson(String str) =>
       RedditMediaMetadatum.fromMap(json.decode(str));
@@ -1063,60 +1034,48 @@ class RedditMediaMetadatum {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'status': status,
-        'e': e,
-        'm': m,
-        'p': p == null ? [] : List<dynamic>.from(p!.map((x) => x.toMap())),
-        's': s?.toMap(),
-        'id': id,
-      };
+    'status': status,
+    'e': e,
+    'm': m,
+    'p': p == null ? [] : List<dynamic>.from(p!.map((x) => x.toMap())),
+    's': s?.toMap(),
+    'id': id,
+  };
 }
 
 class RedditS {
-  RedditS({
-    this.y,
-    this.x,
-    this.u,
-  });
+  RedditS({this.y, this.x, this.u});
 
   factory RedditS.fromJson(String str) => RedditS.fromMap(json.decode(str));
 
-  factory RedditS.fromMap(Map<String, dynamic> json) => RedditS(
-        y: json['y'],
-        x: json['x'],
-        u: json['u'],
-      );
+  factory RedditS.fromMap(Map<String, dynamic> json) =>
+      RedditS(y: json['y'], x: json['x'], u: json['u']);
   final int? y;
   final int? x;
   final String? u;
 
   String toJson() => json.encode(toMap());
 
-  Map<String, dynamic> toMap() => {
-        'y': y,
-        'x': x,
-        'u': u,
-      };
+  Map<String, dynamic> toMap() => {'y': y, 'x': x, 'u': u};
 }
 
 enum WhitelistStatus { allAds, someAds }
 
-final whitelistStatusValues = RedditEnumValues(
-    {'all_ads': WhitelistStatus.allAds, 'some_ads': WhitelistStatus.someAds});
+final whitelistStatusValues = RedditEnumValues({
+  'all_ads': WhitelistStatus.allAds,
+  'some_ads': WhitelistStatus.someAds,
+});
 
 enum PostHint { image, hostedVideo, link }
 
 final postHintValues = RedditEnumValues({
   'hosted:video': PostHint.hostedVideo,
   'image': PostHint.image,
-  'link': PostHint.link
+  'link': PostHint.link,
 });
 
 class RedditPreview {
-  RedditPreview({
-    this.images,
-    this.enabled,
-  });
+  RedditPreview({this.images, this.enabled});
 
   factory RedditPreview.fromJson(String str) =>
       RedditPreview.fromMap(json.decode(str));
@@ -1129,10 +1088,7 @@ class RedditPreview {
       }
     }
 
-    return RedditPreview(
-      images: images,
-      enabled: json['enabled'],
-    );
+    return RedditPreview(images: images, enabled: json['enabled']);
   }
   final List<RedditImage>? images;
   final bool? enabled;
@@ -1140,20 +1096,14 @@ class RedditPreview {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'images': images == null
-            ? []
-            : List<dynamic>.from(images!.map((x) => x.toMap())),
-        'enabled': enabled,
-      };
+    'images':
+        images == null ? [] : List<dynamic>.from(images!.map((x) => x.toMap())),
+    'enabled': enabled,
+  };
 }
 
 class RedditImage {
-  RedditImage({
-    this.source,
-    this.resolutions,
-    this.variants,
-    this.id,
-  });
+  RedditImage({this.source, this.resolutions, this.variants, this.id});
 
   factory RedditImage.fromJson(String str) =>
       RedditImage.fromMap(json.decode(str));
@@ -1167,13 +1117,15 @@ class RedditImage {
     }
 
     return RedditImage(
-      source: json['source'] == null
-          ? null
-          : RedditResizedIcon.fromMap(json['source']),
+      source:
+          json['source'] == null
+              ? null
+              : RedditResizedIcon.fromMap(json['source']),
       resolutions: resolutions,
-      variants: json['variants'] == null
-          ? null
-          : RedditMediaEmbed.fromMap(json['variants']),
+      variants:
+          json['variants'] == null
+              ? null
+              : RedditMediaEmbed.fromMap(json['variants']),
       id: json['id'],
     );
   }
@@ -1185,13 +1137,14 @@ class RedditImage {
   String toJson() => json.encode(toMap());
 
   Map<String, dynamic> toMap() => {
-        'source': source?.toMap(),
-        'resolutions': resolutions == null
+    'source': source?.toMap(),
+    'resolutions':
+        resolutions == null
             ? []
             : List<dynamic>.from(resolutions!.map((x) => x.toMap())),
-        'variants': variants?.toMap(),
-        'id': id,
-      };
+    'variants': variants?.toMap(),
+    'id': id,
+  };
 }
 
 enum SubredditType { public }

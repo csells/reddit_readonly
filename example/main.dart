@@ -16,7 +16,9 @@ void main() async {
   print('---');
 
   final resp2 = await client.getSubmissions(
-      subreddit: 'DungeonCrawlerCarl', options: {'after': resp.after});
+    subreddit: 'DungeonCrawlerCarl',
+    options: {'after': resp.after},
+  );
   // final resp2 = await client.getSubmissions(
   //     subreddit: 'DungeonCrawlerCarl', options: {'after': after});
   for (final post in resp2.posts!) {
@@ -39,10 +41,7 @@ void main() async {
     final resp = await client.getUserSubmissions(
       authorId,
       subreddit: 'programming',
-      options: {
-        'sort': 'new',
-        if (after2 != null) 'after': after2,
-      },
+      options: {'sort': 'new', if (after2 != null) 'after': after2},
     );
 
     dumpResponse(resp);
